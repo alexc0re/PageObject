@@ -5,6 +5,7 @@ import allure
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from pages.index_page import IndexPage
+from pages.main_page import MainPage
 
 @pytest.fixture
 def get_chrome_options():
@@ -32,6 +33,9 @@ def setup(get_webdriver):
 def index_page(setup):
     yield IndexPage(setup)
 
+@pytest.fixture()
+def main_page(setup):
+    yield MainPage(setup)
 
 
 

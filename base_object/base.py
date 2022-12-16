@@ -24,5 +24,5 @@ class BaseObject:
 
     @staticmethod
     def assertion(expected, actual):
-        assert expected == actual, f'Failed, expected :{expected}, but got {actual}'
+        assert expected == actual, f'Failed, expected: {expected}, but got: {actual}'
 
