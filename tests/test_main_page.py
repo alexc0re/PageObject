@@ -1,3 +1,8 @@
+import pytest
+
+
+@pytest.mark.ui
+@pytest.mark.smoke
 def test_some(main_page):
     main_page.fill_login_field()
     main_page.fill_password_field()
