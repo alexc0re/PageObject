@@ -1,3 +1,5 @@
+import pytest
+
 from base_object.base import BaseObject
 from base_object.locators import Locators
 
@@ -21,3 +23,6 @@ class MainPage(BaseObject):
 
     def assert_backpack(self):
         self.assertion('Sauce Labs Backpack', self.get_text(Locators.BACKPACK_ITEM))
+
+    def click_on_product(self, locator):
+        self.to_click(locator)

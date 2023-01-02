@@ -14,6 +14,8 @@ def pytest_addoption(parser):
     parser.addoption('--browsername', action='store', default='chrome',
                      help="Choose browser: chrome or firefox")  # browser selection
 
+    parser.addoption('--browsermode', action='store', default='start-maximized',  # Browser mode selection
+                     help="--headless mode")
 
 @pytest.fixture
 def get_chrome_options():
@@ -32,16 +34,19 @@ def get_edge_options():
 @pytest.fixture
 def get_webdriver(get_chrome_options, request, get_edge_options):
     driver_name = request.config.getoption('browsername')
+    driver_mode = request.config.getoption('browsermode')
     driver = None
     if driver_name == 'chrome':
 
         options = get_chrome_options
+        options.add_argument(driver_mode)
         driver = webdriver.Chrome(options=options, service=Service(ChromeDriverManager().install()))
         return driver
 
     elif driver_name == 'edge':
-        edge_options = get_edge_options
-        driver = webdriver.Edge((EdgeChromiumDriverManager().install()), options=edge_options)
+        options = get_edge_options
+        options.add_argument(driver_mode)
+        driver = webdriver.Edge((EdgeChromiumDriverManager().install()), options=options)
         return driver
 
 
