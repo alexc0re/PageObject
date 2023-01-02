@@ -12,8 +12,13 @@ def test_main_page_opened(main_page):
 
 
 @pytest.mark.smoke
-@pytest.mark.parametrize('locator', (Locators.USERNAME, Locators.PASSWORD))
-def test_user_can_buy_some_goods(main_page, locator):
+@pytest.mark.parametrize('locator', (Locators.BACKPACK_ITEM, Locators.BIKE_LIGHT_ITEM, Locators.BOLT_TSHIRT_ITEM))
+def test_user_can_add_some_goods_to_basket(main_page, locator):
     test_main_page_opened(main_page)
-    main_page.click_on_product(locator)
+    main_page.get_itemname(locator)
+    main_page.to_click(locator)
+    main_page.click_to_basket_btn()
+    main_page.go_to_basket_from_product_page()
+    main_page.checkout_button_is_displayed()
+
 

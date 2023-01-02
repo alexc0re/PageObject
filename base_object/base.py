@@ -22,7 +22,10 @@ class BaseObject:
     def get_text(self, locator):
         return self.is_visible(locator).text
 
+    def get_itemname(self, locator):
+        item_name = self.get_text(locator)
+        return item_name
+
     @staticmethod
     def assertion(expected, actual):
         assert expected == actual, f'Failed, expected: {expected}, but got: {actual}'
-
