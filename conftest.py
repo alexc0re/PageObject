@@ -4,8 +4,18 @@ from selenium.webdriver.chrome.options import Options as chrome_options
 import allure
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
+from webdriver_manager.microsoft import EdgeChromiumDriverManager
 from pages.index_page import IndexPage
 from pages.main_page import MainPage
+
+
+
+def pytest_addoption(parser):
+    parser.addoption('--browsername', action='store', default='chrome',
+                     help="Choose browser: chrome or firefox")  # browser selection
+
+    parser.addoption('--browsermode', action='store', default='start-maximized',  # Browser mode selection
+                     help="--headless mode")
 
 @pytest.fixture
 def get_chrome_options():
@@ -14,12 +24,34 @@ def get_chrome_options():
     options.add_argument('--start-maximized')
     return options
 
+@pytest.fixture
+def get_edge_options():
+    options = webdriver.EdgeOptions()
+    options.add_argument('edge')
+    return options
+
 
 @pytest.fixture
-def get_webdriver(get_chrome_options):
-    options = get_chrome_options
-    driver = webdriver.Chrome(options=options, service=Service(ChromeDriverManager().install()))
-    return driver
+def get_webdriver(get_chrome_options, request, get_edge_options):
+    driver_name = request.config.getoption('browsername')
+    driver_mode = request.config.getoption('browsermode')
+    driver = None
+    if driver_name == 'chrome':
+
+        options = get_chrome_options
+        options.add_argument(driver_mode)
+        driver = webdriver.Chrome(options=options, service=Service(ChromeDriverManager().install()))
+        return driver
+
+    elif driver_name == 'edge':
+        options = get_edge_options
+        options.add_argument(driver_mode)
+        driver = webdriver.Edge((EdgeChromiumDriverManager().install()), options=options)
+        return driver
+
+
+
+
 
 @pytest.fixture(scope='function')
 def setup(get_webdriver):

@@ -1,3 +1,7 @@
+import time
+
+import pytest
+
 from base_object.base import BaseObject
 from base_object.locators import Locators
 
@@ -21,3 +25,16 @@ class MainPage(BaseObject):
 
     def assert_backpack(self):
         self.assertion('Sauce Labs Backpack', self.get_text(Locators.BACKPACK_ITEM))
+
+    def click_to_basket_btn(self):
+        self.to_click(Locators.ADD_TO_BASKET_BUTTON)
+
+    def go_to_basket_from_product_page(self):
+        self.to_click(Locators.CART_BUTTON)
+
+    def checkout_button_is_displayed(self):
+        self.is_visible(Locators.CHECKOUT_BUTTON)
+
+
+
+
