@@ -1,8 +1,8 @@
 from base_object.base import BaseObject
 from base_object.locators import Locators
+from support.asserton import Assertion
 
-
-class IndexPage(BaseObject):
+class IndexPage(BaseObject, Assertion):
     def __init__(self, driver):
         super().__init__(driver)
         self.driver = driver
@@ -20,9 +20,9 @@ class IndexPage(BaseObject):
         self.to_click(Locators.LOGIN_BUTTON)
 
     def assert_title(self):
-        self.assertion('PRODUCTS', self.get_text(Locators.TITLE))
+        self.assertion_equal('PRODUCTS', self.get_text(Locators.TITLE))
 
     def assert_error_message(self):
-        self.assertion('Epic sadface: Username and password do not match any user in this service',
+        self.assertion_equal('Epic sadface: Username and password do not match any user in this service',
                        self.get_text(Locators.LOGIN_ERROR_MESSAGE))
 

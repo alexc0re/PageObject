@@ -2,3 +2,4 @@ pytest_report
 .pytest_cache
 .idea
 allure-results
+logfile.log
