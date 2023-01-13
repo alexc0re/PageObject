@@ -32,6 +32,7 @@ class BaseObject:
 
     def get_text(self, locator):
         self.log.info(f'From {locator}  taken text')
+
         return self.is_visible(locator).text
 
     def get_itemname(self, locator):
