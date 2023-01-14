@@ -23,6 +23,5 @@ class IndexPage(BaseObject, Assertion):
         self.assertion_equal('PRODUCTS', self.get_text(Locators.TITLE))
 
     def assert_error_message(self):
-        self.assertion_equal('Epic sadface: Username and password do not match any user in this service',
-                       self.get_text(Locators.LOGIN_ERROR_MESSAGE))
+        self.assertion_equal('Epic sadface: Username and password do not match any user in this service', self.get_text(Locators.LOGIN_ERROR_MESSAGE))
 
