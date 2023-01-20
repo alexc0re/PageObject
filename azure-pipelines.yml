@@ -1,3 +1,12 @@
+parameters:
+  - name: subscription
+    displayName: Scopes
+    type: string
+    default: regression
+    values:
+      - smoke
+      - regression
+
 trigger:
 - main
 
@@ -22,8 +31,12 @@ steps:
 
 - task: CmdLine@2
   inputs:
-    script: |
-      pytest
+    ${{ if contains(parameters.subscription, 'smoke') }}:
+      script: |
+        pytest -k 'smoke'
+    ${{ if contains(parameters.subscription, 'regression') }}:
+      script: |
+        pytest
   displayName: 'pytest'
   continueOnError: true
 
