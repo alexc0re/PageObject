@@ -33,7 +33,7 @@ steps:
   inputs:
     ${{ if contains(parameters.subscription, 'smoke') }}:
       script: |
-        pytest -k 'smoke'
+        pytest -k "smoke"
     ${{ if contains(parameters.subscription, 'regression') }}:
       script: |
         pytest
