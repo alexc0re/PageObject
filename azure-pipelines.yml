@@ -7,6 +7,13 @@ parameters:
       - smoke
       - regression
 
+schedules:
+- cron: "0 0 * * *"
+  displayName: Daily midnight build
+  branches:
+    include:
+    - main
+
 trigger:
 - main
 
