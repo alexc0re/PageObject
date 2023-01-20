@@ -6,10 +6,8 @@ import json
 from pathlib import Path
 
 
-FULL_PATH = os.path.dirname(os.path.abspath(__file__))
-PATH = Path(FULL_PATH).parent
-#PATH = os.path.dirname(FULL_PATH)
-cred_path = str(PATH)+'/support/passwords.json'
+FULL_PATH = Path(os.path.dirname(os.path.abspath(__file__))).parent
+cred_path = str(FULL_PATH)+'/support/passwords.json'
 creds_file = open(cred_path, 'rb')
 creds = json.load(creds_file)
 
